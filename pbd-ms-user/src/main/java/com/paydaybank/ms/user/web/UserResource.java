@@ -3,9 +3,11 @@ package com.paydaybank.ms.user.web;
 
 import com.paydaybank.ms.user.domain.User;
 import com.paydaybank.ms.user.repository.UserRepository;
+import com.paydaybank.ms.user.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,26 +17,20 @@ import java.util.List;
 @RequestMapping("/api/user")
 public class UserResource {
 
-    @Autowired
-    private PasswordEncoder bcryptEncoder;
+   private UserService userService;
 
-    private final UserRepository userRepository;
-
-    public UserResource(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserResource(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping("/list")
     public List<User> getUserList(){
-        return userRepository.findAll();
+        return userService.getUserList();
     }
 
-    @PostMapping("/create")
-    public User createUser(@RequestBody User user){
-
-        user.setPassword( bcryptEncoder.encode(user.getPassword()));
-
-        return userRepository.save(user);
+    @PostMapping("/register")
+    public ResponseEntity<?> createUser(@RequestBody User user){
+        userService.create(user);
+        return ResponseEntity.accepted().build();
     }
-
 }

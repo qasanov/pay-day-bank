@@ -1,4 +1,5 @@
 package com.paydaybank.ms.user.domain;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.paydaybank.ms.user.constants.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,9 +20,9 @@ public class User {
     @Id
     private String emailAddress;
     private String password;
-/*    private String firstName;
+    private String firstName;
     private String lastName;
     private String phoneNumber;
     private Gender gender;
-    private Date dateOfBirth;*/
+    private Date dateOfBirth;
 }
