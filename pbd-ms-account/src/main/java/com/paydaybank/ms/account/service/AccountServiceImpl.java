@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -31,5 +32,10 @@ public class AccountServiceImpl implements AccountService {
         account.setInsertDate(new Date());
         account.setNumber(AccountUtil.generateAccountNumber(DEFAULT_ACCOUNT_NUMBER_LENGTH));
         return accountRepository.save(account);
+    }
+
+    @Override
+    public List<Account> getActiveAccountList(String username) {
+        return accountRepository.getAccountListByUserNameAndStatus(username, AccountStatus.ACTIVE);
     }
 }
