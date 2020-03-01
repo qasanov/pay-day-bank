@@ -1,0 +1,7 @@
+zuul :
+  routes :
+    pbd-ms-user : /user/**
+  sensitiveHeaders : Cookie,Set-Cookie
+
+
+
