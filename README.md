@@ -24,7 +24,7 @@ is implemented according to given Agile user stories as requirements and consist
 
 
 ## Microservice Design Architecture Diagram
-
+![Diagram](https://user-images.githubusercontent.com/468827/75636283-af76a880-5c36-11ea-8ac5-afa8ee3eebca.jpg)
 
 
 ## Environment
