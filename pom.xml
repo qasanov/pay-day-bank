@@ -14,6 +14,7 @@
         <module>pbd-service-discovery</module>
         <module>pbd-config-server</module>
         <module>pbd-ms-user</module>
+        <module>pbd-ms-account</module>
     </modules>
 
 </project>
