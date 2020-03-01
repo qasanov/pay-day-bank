@@ -15,6 +15,8 @@
         <module>pbd-config-server</module>
         <module>pbd-ms-user</module>
         <module>pbd-ms-account</module>
+        <module>pbd-ms-transaction</module>
+        <module>pbd-ms-notification</module>
     </modules>
 
 </project>
