@@ -1,10 +1,7 @@
 package com.paydaybank.ms.user.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.paydaybank.ms.user.constants.Gender;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,6 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@EqualsAndHashCode
 public class User {
     @Id
     private String emailAddress;

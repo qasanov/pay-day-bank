@@ -27,7 +27,15 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = {ExisitingEmailException.class})
     public ResponseEntity<ApiError> handle(ExisitingEmailException exception) {
         // general exception
-        LOG.error("Exception: Unable to process this request. ", exception);
+        LOG.error("Exception: Existing email. ", exception);
+        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST.toString(), exception.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
+    }
+
+    @ExceptionHandler(value = {WeakPasswordException.class})
+    public ResponseEntity<ApiError> handle(WeakPasswordException exception) {
+        // general exception
+        LOG.error("Exception: Weak password. ", exception);
         ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST.toString(), exception.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
     }

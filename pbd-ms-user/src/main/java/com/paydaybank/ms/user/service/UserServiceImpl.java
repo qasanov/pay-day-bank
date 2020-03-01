@@ -2,7 +2,9 @@ package com.paydaybank.ms.user.service;
 
 import com.paydaybank.ms.user.domain.User;
 import com.paydaybank.ms.user.exceptions.ExisitingEmailException;
+import com.paydaybank.ms.user.exceptions.WeakPasswordException;
 import com.paydaybank.ms.user.repository.UserRepository;
+import com.paydaybank.ms.user.util.PasswordUtil;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,14 +25,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(User user) {
+        validate(user);
+        user.setPassword( bcryptEncoder.encode(user.getPassword()));
+        return userRepository.save(user);
+    }
 
+    private void validate(User user){
         Optional<User> optionalUser = userRepository.findByEmailAddress(user.getEmailAddress());
 
         if(optionalUser.isPresent())
             throw new ExisitingEmailException("Provided email address already exists!");
 
-        user.setPassword( bcryptEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        if(user.getPassword() == null || !PasswordUtil.isAlphanumeric(user.getPassword()))
+            throw new WeakPasswordException("Password should be at least minimum 6 char length and alphanumeric!");
     }
 
     @Override

@@ -31,6 +31,6 @@ public class UserResource {
     @PostMapping("/register")
     public ResponseEntity<?> createUser(@RequestBody User user){
         userService.create(user);
-        return ResponseEntity.accepted().build();
+        return ResponseEntity.ok().build();
     }
 }
