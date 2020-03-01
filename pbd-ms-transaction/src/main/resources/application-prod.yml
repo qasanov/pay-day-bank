@@ -1,0 +1,25 @@
+spring :
+  application :
+    name : pbd-ms-transaction
+  h2 :
+    console :
+      enabled : true
+  datasource:
+    driver-class-name : org.h2.Driver
+    url : jdbc:h2:mem:pdbtransaction;DB_CLOSE_DELAY=-1
+    username : sa
+    password :
+
+
+server :
+  port : 9092
+
+eureka:
+  instance:
+    prefer-ip-address: false
+  client:
+    serviceUrl:
+      defaultZone: http://pbd-service-discovery:8761/eureka/
+
+jwt :
+  secret : javainuse

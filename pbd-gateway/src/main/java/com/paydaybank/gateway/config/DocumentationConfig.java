@@ -16,6 +16,8 @@ public class DocumentationConfig implements SwaggerResourcesProvider {
     public List get() {
         List resources = new ArrayList();
         resources.add(swaggerResource("User Service", "/user/v2/api-docs", "2.0"));
+        resources.add(swaggerResource("Account Service", "/account/v2/api-docs", "2.0"));
+        resources.add(swaggerResource("Transaction Service", "/transaction/v2/api-docs", "2.0"));
         return resources;
     }
 

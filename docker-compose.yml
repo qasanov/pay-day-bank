@@ -1,0 +1,101 @@
+version: '3'
+services:
+
+  pbd-service-discovery:
+    container_name: eureka-server
+    build :
+      context: .
+      dockerfile: pbd-service-discovery/Dockerfile
+    image: qasanov/pbd-service-discovery:latest
+    expose:
+      - 8761
+    ports:
+      - 8761:8761
+    networks:
+      - pbd-networks
+
+
+  pbd-ms-user:
+    container_name: user-service
+    build :
+      context: .
+      dockerfile: pbd-ms-user/Dockerfile
+    image: qasanov/pbd-ms-user:latest
+    expose:
+      - 9090
+    ports:
+      - 0:9090
+    networks:
+      - pbd-networks
+    depends_on:
+      - pbd-service-discovery
+
+
+  pbd-ms-account:
+    container_name: account-service
+    build :
+      context: .
+      dockerfile: pbd-ms-account/Dockerfile
+    image: qasanov/pbd-ms-account:latest
+    expose:
+      - 9091
+    ports:
+      - 0:9091
+    networks:
+      - pbd-networks
+    depends_on:
+      - pbd-service-discovery
+
+
+  pbd-ms-transaction:
+    container_name: transaction-service
+    build :
+      context: .
+      dockerfile: pbd-ms-transaction/Dockerfile
+    image: qasanov/pbd-ms-transaction:latest
+    expose:
+      - 9092
+    ports:
+      - 0:9092
+    networks:
+      - pbd-networks
+    depends_on:
+      - pbd-service-discovery
+
+
+  pbd-config-server:
+    container_name: config-server
+    build :
+      context: .
+      dockerfile: pbd-config-server/Dockerfile
+    image: qasanov/pbd-config-server:latest
+    expose:
+      - 8888
+    ports:
+      - 0:8888
+    networks:
+      - pbd-networks
+    depends_on:
+      - pbd-service-discovery
+
+
+  pbd-gateway:
+    container_name: gateway
+    build :
+      context: .
+      dockerfile: pbd-gateway/Dockerfile
+    image: qasanov/pbd-gateway:latest
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+    networks:
+      - pbd-networks
+    depends_on:
+      - pbd-service-discovery
+      - pbd-config-server
+
+
+networks:
+  pbd-networks:
+

@@ -1,0 +1,21 @@
+spring:
+  application :
+    name : pbd-config-server
+
+  profiles :
+    active : native
+
+  cloud :
+    config:
+      server :
+        native :
+          search-locations : classpath:/common-config/{application}
+          #search-locations : classpath:/common-config
+
+server :
+  port : 8888
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://pbd-service-discovery:8761/eureka/

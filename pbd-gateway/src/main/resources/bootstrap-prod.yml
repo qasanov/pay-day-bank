@@ -1,13 +1,20 @@
 spring:
   profiles :
     active : prod
-  cloud:
-    config:
-      discovery:
-        enabled: true
-        service-id: pbd-config-server
+
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://pbd-service-discovery:8761/eureka/
+
+zuul :
+  routes :
+    pbd-ms-user : /user/**
+    pbd-ms-account : /account/**
+    pbd-ms-transaction : /transaction/**
+
+  sensitiveHeaders : Cookie,Set-Cookie
+
+
+

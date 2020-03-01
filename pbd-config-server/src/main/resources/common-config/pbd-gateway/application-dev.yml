@@ -1,6 +1,9 @@
 zuul :
   routes :
     pbd-ms-user : /user/**
+    pbd-ms-account : /account/**
+    pbd-ms-transaction : /transaction/**
+
   sensitiveHeaders : Cookie,Set-Cookie
 
 
